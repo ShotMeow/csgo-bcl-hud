@@ -21,7 +21,6 @@
 	flex-direction: row;
 	position: fixed;
 	justify-content: center;
-	width: 1148px;
 	height: 70px;
 	top: 35px;
 	left: 50%;
@@ -182,7 +181,7 @@
         }
 	}
 	.team {
-		width: 426px;
+		width: 360px;
 		display: flex;
 		align-items: center;
 		.logo {
@@ -199,7 +198,6 @@
 			}
         }
         &.left {
-            justify-content: center;
             flex-direction: row-reverse;
             .round-thingy {
                 left: -30px;
@@ -209,7 +207,6 @@
             }
         }
         &.right {
-            justify-content: center;
             flex-direction: row;
             .round-thingy {
                 right: -30px;
@@ -454,6 +451,28 @@
 		> .wins_box:last-child {
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 80%);
 		}
+
+		&.rounds-1 {
+			> .wins_box:first-child {
+				height: 50px;
+				clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%, 0 90%, 0 10%);
+			}
+		}
+
+		&.rounds-3 {
+			gap: 2px;
+			> .wins_box {
+				height: 15px;
+
+				&:first-child {
+					clip-path: polygon(100% 0, 100% 0, 100% 100%, 0 100%, 0% 20%);
+				};
+
+				&:last-child {
+					clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 80%);
+				};
+			}
+		}
 	}
 
 	&.right {
@@ -463,6 +482,28 @@
 
 		> .wins_box:last-child {
 			clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%, 0 100%);
+		}
+
+		&.rounds-1 {
+			> .wins_box:first-child {
+				height: 50px;
+				clip-path: polygon(100% 10%, 100% 90%, 0 100%, 0 100%, 0 0, 0 0);
+			}
+		}
+
+		&.rounds-3 {
+			gap: 2px;
+			> .wins_box {
+				height: 15px;
+
+				&:first-child {
+					clip-path: polygon(0 0, 0 0, 100% 20%, 100% 100%, 0 100%);
+				};
+
+				&:last-child {
+					clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%, 0 100%);
+				};
+			}
 		}
 	}
 }

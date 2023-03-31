@@ -207,7 +207,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
             showWin={winState.show && winState.side === "left"}
           />
           <div className={`score left ${left.side}`}>
-            <div className={`wins_box_container left`}>
+            <div className={`wins_box_container left rounds-${amountOfMaps}`}>
               {new Array(amountOfMaps).fill(0).map((_, i) => (
                 <div
                   key={i}
@@ -232,7 +232,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
             <Bomb />
           </div>
           <div className={`score right ${right.side}`}>
-            <div className={`wins_box_container right`}>
+            <div className={`wins_box_container right rounds-${amountOfMaps}`}>
               {new Array(amountOfMaps).fill(0).map((_, i) => (
                 <div
                   key={i}
