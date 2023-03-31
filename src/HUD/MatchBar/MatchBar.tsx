@@ -2,12 +2,14 @@ import React from "react";
 import * as I from "csgogsi-socket";
 import "./matchbar.scss";
 import TeamScore from "./TeamScore";
-import Bomb from "./../Timers/BombTimer";
 import Countdown from "./../Timers/Countdown";
 import { GSI } from "../../App";
 import { Match } from "../../api/interfaces";
 import cupSrc from "../../assets/cup.png";
 import matchbarBgSrc from "../../assets/matchbar-bg.png";
+import { Defuse } from "../../assets/Icons";
+import { apiUrl } from "../../api/api";
+import Bomb from "../Timers/BombTimer";
 
 function stringToClock(time: string | number, pad = true) {
   if (typeof time === "string") {
@@ -218,18 +220,35 @@ export default class TeamBox extends React.Component<IProps, IState> {
               ))}
             </div>
             <span>{left.score}</span>
+            <div
+              className={`defuse-bar ${
+                !isPlanted || bomb?.state !== "defusing" ? "hide" : ""
+              }`}
+            >
+              <div className="indicator">
+                <div
+                  className="stripe"
+                  style={{ width: `${100 - defusing.width}%` }}
+                />
+              </div>
+              <Defuse />
+            </div>
+            <Bomb isPlanted={isPlanted} bomb={bomb} />
           </div>
-          <div id="timer" className={bo === 0 ? "no-bo" : ""}>
+          <div id="timer">
             <img className="matchbar-bg" src={matchbarBgSrc} alt="Фон" />
             <div className="cup-bg" />
             <img className="cup" src={cupSrc} alt="Кубок" />
-            <div id={`round_timer_text`} className={isPlanted ? "hide" : ""}>
-              {time}
+            <div className={`round_timer_text ${isPlanted ? "planting" : ""}`}>
+              {isPlanted ? (
+                <span>
+                  BOMB ON <br /> {bomb?.site}
+                </span>
+              ) : (
+                time
+              )}
             </div>
-            <div id="round_now" className={isPlanted ? "hide" : ""}>
-              {this.getRoundLabel()}
-            </div>
-            <Bomb />
+            <div id="round_now">{this.getRoundLabel()}</div>
           </div>
           <div className={`score right ${right.side}`}>
             <div className={`wins_box_container right rounds-${amountOfMaps}`}>
@@ -243,6 +262,20 @@ export default class TeamBox extends React.Component<IProps, IState> {
               ))}
             </div>
             <span>{right.score}</span>
+            <div
+              className={`defuse-bar ${
+                !isPlanted || bomb?.state !== "defusing" ? "hide" : ""
+              }`}
+            >
+              <Defuse />
+              <div className="indicator">
+                <div
+                  className="stripe"
+                  style={{ width: `${100 - defusing.countdown}%` }}
+                />
+              </div>
+            </div>
+            <Bomb isPlanted={isPlanted} bomb={bomb} />
           </div>
           <TeamScore
             team={right}
@@ -250,6 +283,35 @@ export default class TeamBox extends React.Component<IProps, IState> {
             timer={rightTimer}
             showWin={winState.show && winState.side === "right"}
           />
+        </div>
+        <div
+          className={`winner ${right.side === "CT" ? "CT" : "T"} ${
+            winState.show && winState.side === "right" ? "show" : "hidden"
+          }`}
+        >
+          {right.logo && right.id ? (
+            <img
+              src={`${apiUrl}api/teams/logo/${right.id}`}
+              alt={"Team logo"}
+            />
+          ) : (
+            ""
+          )}
+          <div className="title">Wins the Round</div>
+          <div className="team">{right.name}</div>
+        </div>
+        <div
+          className={`winner ${left.side === "CT" ? "CT" : "T"} ${
+            winState.show && winState.side === "left" ? "show" : "hidden"
+          }`}
+        >
+          {left.logo && left.id ? (
+            <img src={`${apiUrl}api/teams/logo/${left.id}`} alt={"Team logo"} />
+          ) : (
+            ""
+          )}
+          <div className="title">Wins the Round</div>
+          <div className="team">{left.name}</div>
         </div>
       </>
     );

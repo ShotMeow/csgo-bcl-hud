@@ -1,27 +1,33 @@
 import React from "react";
 
+import * as I from "csgogsi-socket";
+
 import { GSI } from "./../../App";
 import BombTimer from "./Countdown";
-import { C4 } from "./../../assets/Icons";
+import { ReactComponent as BombIcon } from "../../assets/weapons/c4.svg";
 
-export default class Bomb extends React.Component<any, { height: number; show: boolean }> {
+export default class Bomb extends React.Component<
+  { isPlanted: boolean | null; bomb: I.Bomb | null },
+  { width: number; show: boolean }
+> {
   constructor(props: any) {
     super(props);
     this.state = {
-      height: 0,
-      show: false
+      width: 0,
+      show: false,
     };
   }
+
   hide = () => {
-    this.setState({ show: false, height: 100 });
+    this.setState({ show: false, width: 100 });
   };
   componentDidMount() {
-    const bomb = new BombTimer(time => {
-      let height = time > 40 ? 4000 : time * 100;
-      this.setState({ height: height / 40 });
+    const bomb = new BombTimer((time) => {
+      let width = time > 40 ? 4000 : time * 100;
+      this.setState({ width: width / 40 });
     });
     bomb.onReset(this.hide);
-    GSI.on("data", data => {
+    GSI.on("data", (data) => {
       if (data.bomb && data.bomb.countdown) {
         if (data.bomb.state === "planted") {
           this.setState({ show: true });
@@ -37,11 +43,15 @@ export default class Bomb extends React.Component<any, { height: number; show: b
   }
 
   render() {
+    const { isPlanted, bomb } = this.props;
     return (
-      <div id={`bomb_container`}>
-        <div className={`bomb_timer ${this.state.show ? "show" : "hide"}`} style={{ height: `${this.state.height}%` }}></div>
-        <div className={`bomb_icon ${this.state.show ? "show" : "hide"}`}>
-          <C4 fill="white" />
+      <div className={`plant-bar ${!isPlanted ? "hide" : ""}`}>
+        <BombIcon />
+        <div className="indicator">
+          <div
+            className="stripe"
+            style={{ width: `${100 - this.state.width}%` }}
+          />
         </div>
       </div>
     );
