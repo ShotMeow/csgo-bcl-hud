@@ -111,9 +111,9 @@ export default class Layout extends React.Component<Props, State> {
           bomb={game.bomb}
           match={match}
         />
-        <Pause phase={game.phase_countdowns} />
-        <Timeout map={game.map} phase={game.phase_countdowns} />
-        <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} />
+        {/* <Pause phase={game.phase_countdowns} /> */}
+        {/* <Timeout map={game.map} phase={game.phase_countdowns} /> */}
+        {/* <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} /> */}
 
         <Tournament />
 
