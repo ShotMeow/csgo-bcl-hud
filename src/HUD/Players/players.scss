@@ -13,6 +13,10 @@
         .top {
             padding-left: 80px;
             padding-right: 20px;
+
+            .background, .background-red {
+                left: 0;
+            }
         }
 
         .bottom {
@@ -22,8 +26,16 @@
             .grenades {
                 padding-right: 15px;
             }
+        }
 
-            clip-path: polygon(100% 0, 90% 50%, 90% 100%, 0 100%, 0 0);
+        .player {
+            clip-path: polygon(0 100%, 0 0, 100% 0, 100% 42%, 90% 70%, 90% 100%);
+        }
+        .player.dead {
+            clip-path: polygon(0 100%, 0 0, 70% 0, 70% 42%, 60% 70%, 60% 100%);
+            .avatar {
+                filter: grayscale(100%);
+            }
         }
     }
 
@@ -46,13 +58,15 @@
             .armor {
                 flex-direction: row-reverse;
             }
+
+            .background, .background-red {
+                right: 0;
+            }
         }
 
         .bottom {
             padding-right: 100px;
             padding-left: 25px;
-
-            clip-path: polygon(100% 0, 100% 100%, 10% 100%, 10% 50%, 0 0);
 
             .grenades {
                 padding-left: 15px;
@@ -78,25 +92,43 @@
                 flex-direction: row-reverse;
             }
         }
+
+        .player {
+            clip-path: polygon(0 42%, 0 0, 100% 0, 100% 100%, 10% 100%, 10% 70%);
+        }
+        .player.dead {
+            clip-path: polygon(30% 40%, 30% 0, 100% 0, 100% 100%, 40% 100%, 40% 70%);
+            .avatar {
+                filter: grayscale(100%);
+            }
+        }
     }
 
     &.CT {
         .player .top {
-            background-color: var(--color-new-ct);
+            background-color: rgba(255, 255, 255, 0.2);
+            .background {
+                background-color: var(--color-new-ct);
+            }
         }
     }
 
     &.T {
         .player .top {
-            background-color: var(--color-new-t);
+            background-color: rgba(255, 255, 255, 0.2);
+            .background {
+                background-color: var(--color-new-t);
+            }
         }
     }
 
     .player {
         position: relative;
         width: 334px;
-        height: 78px;
+        height: 85px;
         color: white;
+        transition: all 0.5s ease;
+        background-color: var(--sub-panel-color);
 
         .avatar {
             position: absolute;
@@ -106,14 +138,28 @@
 
         > .top {
             display: flex;
+            position: relative;
             justify-content: space-between;
             padding-top: 3px;
             padding-bottom: 3px;
             font-size: 18px;
             font-weight: 900;
 
+            .background-red {
+                transition: width 0.3s linear;
+            }
+
+            .background, .background-red {
+                position: absolute;
+                background-color: red;
+                top: 0;
+                height: 100%;
+            }
+
             .name {
                 display: flex;
+                position: relative;
+                z-index: 2;
                 align-items: center;
                 gap: 10px;
             }
@@ -121,6 +167,8 @@
             .armor {
                 display: flex;
                 gap: 10px;
+                position: relative;
+                z-index: 2;
                 align-items: center;
                 svg {
                     width: 15px;
@@ -131,11 +179,12 @@
 
         > .bottom {
             background-color: var(--sub-panel-color);
-            padding-top: 3px;
-            padding-bottom: 3px;
+            padding-top: 4px;
+            padding-bottom: 4px;
 
             .bottom-header {
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
 
                 .money {
@@ -145,12 +194,17 @@
                 }
             }
 
-            .weapon svg {
-               width: 52px;
+            .weapon {
+                height: 16px;
+                svg {
+                    width: 50px;
+                    height: 16px;
+                }
             }
 
             .bottom-footer {
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
                 font-weight: 900;
 
@@ -161,6 +215,9 @@
                         display: flex;
                         align-items: center;
                         gap: 5px;
+                        span {
+                            padding-top: 2px;
+                        }
 
                         svg {
                             width: 15px;
@@ -169,12 +226,17 @@
 
                     .round-kills {
                         color: #6a6a6a;
+                        padding-top: 2px;
                     }
 
                     .deaths {
                         display: flex;
                         align-items: center;
                         gap: 5px;
+
+                        span {
+                            padding-top: 2px;
+                        }
 
                         svg {
                             width: 15px;
@@ -189,6 +251,12 @@
                         fill: #bebebe;
                     }
                 }
+            }
+        }
+
+        &.dead {
+            .armor, .weapon, .grenades {
+                display: none;
             }
         }
     }

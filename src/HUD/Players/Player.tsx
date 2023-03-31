@@ -115,6 +115,14 @@ const Player = ({ player, isObserved }: IProps) => {
           <ArmorFull />
           <span>{player?.state.armor}</span>
         </div>
+        <div
+          className="background-red"
+          style={{ width: `${player?.state.health}%` }}
+        />
+        <div
+          className="background"
+          style={{ width: `${player?.state.health}%` }}
+        />
       </div>
       <div className="bottom">
         <div className="bottom-header">
