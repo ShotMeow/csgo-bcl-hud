@@ -45,6 +45,19 @@
                 }
             }
 
+            .utilities {
+                display: flex;
+                gap: 20px;
+
+                .main {
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        fill: white;
+                    }
+                }
+            }
+
             .grenades {
                 display: flex;
 
@@ -61,35 +74,52 @@
             padding: 8px 20px;
             justify-content: space-between;
 
+            .stats {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+
             .health {
                 display: flex;
+                width: 70px;
+                height: 42px;
                 align-items: center;
                 gap: 10px;
                 font-size: 28px;
                 font-weight: 900;
 
                 svg {
-                    width: 30px;
-                    height: 30px;
+                    width: 27px;
+                    height: 27px;
                 }
             }
 
             .armor {
                 display: flex;
+                width: 70px;
+                height: 45px;
                 align-items: center;
                 gap: 10px;
                 font-size: 28px;
                 font-weight: 900;
 
+                span {
+                    padding-top: 3px;
+                }
+
                 svg {
-                    width: 30px;
-                    height: 30px;
+                    width: 40px;
+                    height: 27px;
                 }
             }
 
             .statistics {
                 display: flex;
                 gap: 20px;
+                width: 150px;
+                height: 32px;
+                height: 32px;
                 font-size: 22px;
                 font-weight: 700;
 
@@ -100,6 +130,10 @@
             }
 
             .ammo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 61px;
                 font-size: 22px;
                 font-weight: 900;
                 .counter {

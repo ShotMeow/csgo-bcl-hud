@@ -17,6 +17,9 @@ import {
 } from "./../../assets/Icons";
 import { Veto } from "../../api/interfaces";
 import { actions } from "../../App";
+import Defuse from "../Indicators/Defuse";
+import Bomb from "../Indicators/Bomb";
+import Armor from "../Indicators/Armor";
 
 class Statistic extends React.PureComponent<{
   label: string;
@@ -90,37 +93,45 @@ export default class Observed extends React.Component<
               <TeamLogo team={player.team} height={35} width={35} />
               <div>{player?.name}</div>
             </div>
-            <div className="grenades">
-              {grenades.map((grenade) => (
-                <React.Fragment
-                  key={`${player.steamid}_${grenade.name}_${
-                    grenade.ammo_reserve || 1
-                  }`}
-                >
-                  <Weapon
-                    weapon={grenade.name}
-                    active={grenade.state === "active"}
-                    isGrenade
-                  />
-                  {grenade.ammo_reserve === 2 ? (
+            <div className="utilities">
+              <div className="main">
+                <Bomb player={player} />
+                <Defuse player={player} />
+              </div>
+              <div className="grenades">
+                {grenades.map((grenade) => (
+                  <React.Fragment
+                    key={`${player.steamid}_${grenade.name}_${
+                      grenade.ammo_reserve || 1
+                    }`}
+                  >
                     <Weapon
                       weapon={grenade.name}
                       active={grenade.state === "active"}
                       isGrenade
                     />
-                  ) : null}
-                </React.Fragment>
-              ))}
+                    {grenade.ammo_reserve === 2 ? (
+                      <Weapon
+                        weapon={grenade.name}
+                        active={grenade.state === "active"}
+                        isGrenade
+                      />
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           </div>
           <div className="bottom">
-            <div className="health">
-              <HealthFull />
-              <span>{player?.state.health}</span>
-            </div>
-            <div className="armor">
-              <ArmorFull />
-              <span>{player?.state.armor}</span>
+            <div className="stats">
+              <div className="health">
+                <HealthFull />
+                <span>{player?.state.health}</span>
+              </div>
+              <div className="armor">
+                <ArmorFull />
+                <span>{player?.state.armor}</span>
+              </div>
             </div>
             <div className="statistics">
               <Statistic label={"K"} value={stats.kills} />
