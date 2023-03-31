@@ -125,7 +125,7 @@
                         color: #b2b2b2;
                     }
                     .armor_and_utility {
-                        width: 0px;
+                        width: 0;
                         overflow: hidden;
                     }
                     .money {
@@ -325,8 +325,9 @@
 .players_alive {
     display: flex;
     flex-direction: column;
-    width: 180px;
-    background-color: rgba(0,0,0,0.5);
+    width: 170px;
+    background-color: rgba(0,0,0,0.9);
+    clip-path: polygon(8% 0%, 92% 0%, 100% 15%, 100% 85%, 92% 100%, 8% 100%, 0% 85%, 0% 15%);
     position: fixed;
     right: 10px;
     top: 10px;
@@ -334,18 +335,22 @@
     transition: opacity 1s;
     .counter_container {
         display: flex;
-        height: 45px;
-        > div {
-            flex: 1;
+        height: 50px;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+        > .team_counter {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size:30px;
+            font-size:36px;
+            font-weight: 900;
             color: white;
-            background-color: rgba(0,0,0,0.5);
         }
-        .team_counter {
-            background-color: rgba(0,0,0,0.75);
+        > .vs_counter {
+            color: white;
+            font-size: 14px;
+            font-weight: 900;
         }
         .CT {
             color: var(--color-new-ct);
@@ -356,14 +361,14 @@
     }
     .title_container {
         color: white;
-        text-transform: uppercase;
         text-align: center;
-        height:20px;
+        height: 27px;
         font-size:14px;
+        font-weight: 700;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba(0,0,0,0.75);
+        background-color: rgba(255,255,255,0.1);
     }
     &.hide {
         opacity: 0;
