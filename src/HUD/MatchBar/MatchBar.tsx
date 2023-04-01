@@ -5,8 +5,10 @@ import TeamScore from "./TeamScore";
 import Countdown from "./../Timers/Countdown";
 import { GSI } from "../../App";
 import { Match } from "../../api/interfaces";
+
 import cupSrc from "../../assets/cup.png";
 import matchbarBgSrc from "../../assets/matchbar-bg.png";
+
 import { Defuse } from "../../assets/Icons";
 import { apiUrl } from "../../api/api";
 import Bomb from "../Timers/BombTimer";
@@ -238,7 +240,6 @@ export default class TeamBox extends React.Component<IProps, IState> {
           <div id="timer">
             <img className="matchbar-bg" src={matchbarBgSrc} alt="Фон" />
             <div className="cup-bg" />
-            <img className="cup" src={cupSrc} alt="Кубок" />
             <div className={`round_timer_text ${isPlanted ? "planting" : ""}`}>
               {isPlanted ? (
                 <span>
@@ -297,12 +298,12 @@ export default class TeamBox extends React.Component<IProps, IState> {
           ) : (
             ""
           )}
-          <div className="title">Wins the Round</div>
           <div className="team">{right.name}</div>
+          <div className="title">Wins the Round</div>
         </div>
         <div
           className={`winner ${left.side === "CT" ? "CT" : "T"} ${
-            winState.show && winState.side === "left" ? "show" : "hidden"
+            winState.show && winState.side === "left" ? "show" : "show"
           }`}
         >
           {left.logo && left.id ? (
@@ -310,8 +311,8 @@ export default class TeamBox extends React.Component<IProps, IState> {
           ) : (
             ""
           )}
-          <div className="title">Wins the Round</div>
           <div className="team">{left.name}</div>
+          <div className="title">Wins the Round</div>
         </div>
       </>
     );

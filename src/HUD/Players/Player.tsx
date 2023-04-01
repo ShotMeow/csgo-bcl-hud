@@ -94,9 +94,9 @@ const Player = ({ player, isObserved }: IProps) => {
 
   return (
     <div
-      className={`player ${player.state.health === 0 ? "dead" : ""} ${
-        isObserved ? "active" : ""
-      }`}
+      className={`player ${player.state.flashed ? "flashed" : "flashed"} ${
+        player.state.health === 0 ? "dead" : ""
+      } ${isObserved ? "active" : ""}`}
     >
       <Avatar
         steamid={player.steamid}
