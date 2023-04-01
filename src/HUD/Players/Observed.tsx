@@ -79,6 +79,7 @@ export default class Observed extends React.Component<
       <div className={`observed ${player.team.side}`}>
         <div className="avatar-container">
           <Avatar
+            player={player}
             steamid={player.steamid}
             height={140}
             width={140}

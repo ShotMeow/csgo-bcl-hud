@@ -9,8 +9,17 @@
     color: white;
     background-color: var(--sub-panel-color);
 
+    .no-avatar {
+        position: relative;
+        top: -5px;
+        left: -5px;
+        width: 145px;
+        height: 145px;
+    }
+
     .avatar-container {
         position: relative;
+        width: 140px;
         .avatar {
             position: relative;
             top: -30px;

@@ -15,6 +15,13 @@
     &.left {
         left: 20px;
 
+        .no-avatar {
+            position: relative;
+            left: -10px;
+            height: 90px;
+            width: 90px;
+        }
+
         &.CT {
             .player.active {
                 .avatar {
@@ -68,6 +75,14 @@
 
     &.right {
         right: 20px;
+
+        .no-avatar {
+            position: relative;
+            left: 10px;
+            transform: scale(-1, 1);
+            height: 90px;
+            width: 90px;
+        }
 
         &.CT {
             .avatar {

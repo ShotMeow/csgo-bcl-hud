@@ -100,6 +100,7 @@ const Player = ({ player, isObserved }: IProps) => {
     >
       <Avatar
         steamid={player.steamid}
+        player={player}
         height={80}
         width={80}
         showSkull={false}
