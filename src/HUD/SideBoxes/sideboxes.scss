@@ -1,12 +1,12 @@
 .boxes {
 	position: fixed;
-	bottom: 384px;
+	bottom: 520px;
 }
 .boxes.left {
-	left: 10px;
+	left: 20px;
 }
 .boxes.right {
-	right: 10px;
+	right: 20px;
 }
 .boxes.hide {
 	.utilitybox {
@@ -72,18 +72,16 @@
 	}
 }
 .utilitybox {
-	width: 415px;
+	clip-path: polygon(5% 0%, 95% 0%, 100% 15%, 100% 85%, 100% 100%, 100% 100%, 0% 100%, 0% 30%);
+	width: 334px;
 	height: 70px;
 	display: flex;
-	flex-direction: row;
 	opacity: 1;
 	transition: all 0.75s;
 	background-color: var(--sub-panel-color);
 	margin-bottom: 4px;
 	margin-top: 4px;
 	flex-direction: column;
-	margin-bottom: 4px;
-	border-radius: 20px 20px 0 0;
 	.title_container {
 		display: flex;
 		flex-direction: row;
@@ -121,17 +119,16 @@
 	}
 }
 .moneybox {
-	width: 415px;
-	height: 70px;
+	width: 334px;
+	height: 50px;
 	display: flex;
 	flex-direction: row;
 	opacity: 1;
 	transition: all 0.75s;
 	background-color: var(--sub-panel-color);
-	margin-bottom: 4px;
 	margin-top: 4px;
+	text-align: center;
 	font-weight: 600;
-	margin-bottom: 0px;
 	.money_container {
 		display: flex;
 		flex-direction: column;
@@ -145,7 +142,6 @@
 			justify-content: center;
 		}
 		.value {
-			flex: 1;
 			display: flex;
 			align-items: center;
 			font-size: 18px;

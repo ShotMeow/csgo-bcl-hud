@@ -43,9 +43,11 @@ html, body, .map-container {
 }
 
 .map-container .map {
+    position: relative;
+    top: -50px;
+    left: -40px;
     width:1024px;
     height: 1024px;
-    position: relative;
     transform: scale(1);
     transition: all 0.5s;
 }

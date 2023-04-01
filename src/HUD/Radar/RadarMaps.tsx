@@ -47,10 +47,7 @@ export default class RadarMaps extends React.Component<Props, State> {
         id={`radar_maps_container`}
         className={`${!showRadar ? "hide" : ""} ${showBig ? "preview" : ""}`}
       >
-        <div
-          className="radar-component-container"
-          style={{ width: `${size}px`, height: `${size}px` }}
-        >
+        <div className="radar-component-container">
           <Radar radarSize={size} game={this.props.game} />
         </div>
         {match ? (

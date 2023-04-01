@@ -169,6 +169,10 @@
 		}
 	}
 
+	.plant-bar svg {
+		transform: rotate(90deg);
+	}
+
 	.T {
 		&.score {
 			color: var(--color-new-t);

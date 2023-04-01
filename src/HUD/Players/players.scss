@@ -10,6 +10,28 @@
     &.left {
         left: 20px;
 
+        &.CT {
+            .player.active {
+                .avatar {
+                    background: radial-gradient(50% 50% at 50% 70%, var(--color-new-ct) 0%, rgba(0, 0, 0, 0) 100%);
+                }
+                .bottom {
+                    background: linear-gradient(269.14deg, var(--color-new-ct) 0%, rgba(0, 0, 0, 0) 80%);
+                }
+            }
+        }
+
+        &.T {
+            .player.active {
+                .avatar {
+                    background: radial-gradient(50% 50% at 50% 70%, var(--color-new-t) 0%, rgba(0, 0, 0, 0) 100%);
+                }
+                .bottom {
+                    background: linear-gradient(269.14deg, var(--color-new-t) 0%, rgba(0, 0, 0, 0) 80%);
+                }
+            }
+        }
+
         .top {
             padding-left: 80px;
             padding-right: 20px;
@@ -41,6 +63,28 @@
 
     &.right {
         right: 20px;
+
+        &.CT {
+            .avatar {
+                background: radial-gradient(50% 50% at 50% 70%, var(--color-new-ct) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+            .player.active {
+                .bottom {
+                    background: linear-gradient(90deg, var(--color-new-ct) 0%, rgba(0, 0, 0, 0) 80%);
+                }
+            }
+        }
+
+        &.T {
+            .player.active {
+                .avatar {
+                    background: radial-gradient(50% 50% at 50% 70%, var(--color-new-t) 0%, rgba(0, 0, 0, 0) 100%);
+                }
+                .bottom {
+                    background: linear-gradient(90deg, var(--color-new-t) 0%, rgba(0, 0, 0, 0) 80%);
+                }
+            }
+        }
 
         .avatar {
             right: 0;

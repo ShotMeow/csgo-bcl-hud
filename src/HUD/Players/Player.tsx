@@ -150,7 +150,9 @@ const Player = ({ player, isObserved }: IProps) => {
               <span>{player.stats.kills}</span>
             </div>
             <div className="round-kills">
-              <span>{player.state.round_kills}</span>
+              <span>
+                {player.state.round_kills !== 0 && player.state.round_kills}
+              </span>
             </div>
             <div className="deaths">
               <DeathIcon />
