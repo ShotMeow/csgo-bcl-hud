@@ -24,6 +24,19 @@ interface Props {
   show: boolean;
 }
 
+const getCurrentMoney = (money: number) => {
+  const moneyArr = String(money).split("");
+  if (String(money).length === 4) {
+    moneyArr.splice(1, 0, " ");
+  }
+
+  if (String(money).length === 5) {
+    moneyArr.splice(2, 0, " ").join("");
+  }
+
+  return moneyArr.join("");
+};
+
 export default class Money extends React.PureComponent<Props> {
   render() {
     return (
@@ -34,15 +47,15 @@ export default class Money extends React.PureComponent<Props> {
       >
         <div className="money_container">
           <div className="title">Loss Bonus</div>
-          <div className="value">${this.props.loss}</div>
+          <div className="value">{getCurrentMoney(this.props.loss)}$</div>
         </div>
         <div className="money_container">
           <div className="title">Team Money</div>
-          <div className="value">${this.props.money}</div>
+          <div className="value">{getCurrentMoney(this.props.money)}$</div>
         </div>
         <div className="money_container">
-          <div className="title">Equipment Value</div>
-          <div className="value">${this.props.equipment}</div>
+          <div className="title">Equipment</div>
+          <div className="value">{getCurrentMoney(this.props.equipment)}$</div>
         </div>
       </div>
     );
