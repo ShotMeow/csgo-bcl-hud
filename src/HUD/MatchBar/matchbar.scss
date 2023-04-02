@@ -90,6 +90,9 @@
 	left: 50%;
 	transform: translateX(-50%);
 	color: white;
+	svg {
+		color: white;
+	}
 	.CT {
 		&.score {
 			color: var(--color-new-ct);

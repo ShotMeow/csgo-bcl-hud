@@ -66,3 +66,66 @@
 		font-weight: 600;
 	}
 }
+
+.rounds-result {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	width: 960px;
+	padding: 10px 20px;
+	top: 115px;
+	position: absolute;
+	gap: 5px;
+	background-color: var(--sub-panel-color);
+	color: white;
+	left: 50%;
+	transform: translateX(-50%);
+	svg {
+		width: 15px;
+		height: 15px;
+	}
+	&.hide {
+		display: none;
+	}
+
+	.round {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 2px;
+
+		.block {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 900;
+			font-size: 14px;
+			width: 28px;
+			height: 28px;
+			.block-top {
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 4px;
+				position: absolute;
+				background-color: #666666;
+			}
+			span {
+				padding-top: 4px;
+			}
+			&.CT {
+				background: linear-gradient(180deg, rgba(114, 193, 230, 0.6) 0%, rgba(255, 255, 255, 0) 90%);
+				.block-top {
+					background-color: var(--color-new-ct);
+				}
+			}
+			&.T {
+				background: linear-gradient(180deg, rgba(210, 171, 103, 0.6) 0%, rgba(255, 255, 255, 0) 90%);
+				.block-top {
+					background-color: var(--color-new-t);
+				}
+			}
+		}
+	}
+}

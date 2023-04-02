@@ -10,6 +10,7 @@ interface Props {
   match: Match | null;
   map: Map;
   game: CSGO;
+  veto: Veto | null;
 }
 interface State {
   showRadar: boolean;
@@ -55,6 +56,7 @@ export default class RadarMaps extends React.Component<Props, State> {
             match={this.props.match}
             map={this.props.map}
             game={this.props.game}
+            veto={this.props.veto}
           />
         ) : null}
       </div>
@@ -64,51 +66,18 @@ export default class RadarMaps extends React.Component<Props, State> {
 
 class MapsBar extends React.PureComponent<Props> {
   render() {
-    const { match, map } = this.props;
+    const { match, map, veto } = this.props;
     if (!match || !match.vetos.length) return "";
     const picks = match.vetos.filter(
       (veto) => veto.type !== "ban" && veto.mapName
     );
-    if (picks.length > 3) {
-      const current = picks.find((veto) => map.name.includes(veto.mapName));
-      if (!current) return null;
-      return (
-        <div id="maps_container">
-          {
-            <MapEntry
-              veto={current}
-              map={map}
-              team={
-                current.type === "decider"
-                  ? null
-                  : map.team_ct.id === current.teamId
-                  ? map.team_ct
-                  : map.team_t
-              }
-            />
-          }
-        </div>
-      );
-    }
     return (
       <div id="maps_container">
-        {match.vetos
-          .filter((veto) => veto.type !== "ban")
-          .filter((veto) => veto.teamId || veto.type === "decider")
-          .map((veto) => (
-            <MapEntry
-              key={veto.mapName}
-              veto={veto}
-              map={this.props.map}
-              team={
-                veto.type === "decider"
-                  ? null
-                  : map.team_ct.id === veto.teamId
-                  ? map.team_ct
-                  : map.team_t
-              }
-            />
-          ))}
+        <MapEntry
+          veto={veto}
+          map={this.props.map}
+          team={map.team_ct.id === veto?.teamId ? map.team_ct : map.team_t}
+        />
       </div>
     );
   }
@@ -136,7 +105,7 @@ const getCurrentMap = (map: string) => {
 };
 
 class MapEntry extends React.PureComponent<{
-  veto: Veto;
+  veto: Veto | null;
   map: Map;
   team: Team | null;
 }> {
@@ -144,13 +113,15 @@ class MapEntry extends React.PureComponent<{
     const { veto, map, team } = this.props;
     return (
       <div className="veto_entry">
-        <div
-          className={`map_name ${
-            map.name.includes(veto.mapName) ? "active" : ""
-          }`}
-        >
-          Playing on {getCurrentMap(veto.mapName)} | Picked by {team?.name}
-        </div>
+        {veto && (
+          <div
+            className={`map_name ${
+              map.name.includes(veto.mapName) ? "active" : ""
+            }`}
+          >
+            Playing on {getCurrentMap(veto.mapName)} | Picked by {team?.name}
+          </div>
+        )}
       </div>
     );
   }

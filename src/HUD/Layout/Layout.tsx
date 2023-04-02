@@ -3,7 +3,7 @@ import TeamBox from "./../Players/TeamBox";
 import MatchBar from "../MatchBar/MatchBar";
 import SeriesBox from "../MatchBar/SeriesBox";
 import Observed from "./../Players/Observed";
-import { CSGO, Team } from "csgogsi-socket";
+import { CSGO, Round, RoundInfo, Team } from "csgogsi-socket";
 import { Match } from "../../api/interfaces";
 import RadarMaps from "./../Radar/RadarMaps";
 import Trivia from "../Trivia/Trivia";
@@ -18,6 +18,10 @@ import Tournament from "../Tournament/Tournament";
 import Pause from "../PauseTimeout/Pause";
 import Timeout from "../PauseTimeout/Timeout";
 
+import { ReactComponent as DeathIcon } from "../../assets/bcl/death_icon.svg";
+import { ReactComponent as DefuseIcon } from "../../assets/images/icon_defuse_default.svg";
+import { ReactComponent as BombIcon } from "../../assets/weapons/c4.svg";
+
 interface Props {
   game: CSGO;
   match: Match | null;
@@ -28,6 +32,25 @@ interface State {
   showWin: boolean;
   forceHide: boolean;
 }
+
+const getRound = (round: number | undefined) => {
+  switch (round) {
+    case 5:
+      return round;
+    case 10:
+      return round;
+    case 15:
+      return round;
+    case 20:
+      return round;
+    case 25:
+      return round;
+    case 30:
+      return round;
+    default:
+      return;
+  }
+};
 
 export default class Layout extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -88,6 +111,16 @@ export default class Layout extends React.Component<Props, State> {
       game.phase_countdowns.phase === "freezetime";
     const { forceHide } = this.state;
 
+    const roundsArr: Partial<RoundInfo>[] = [];
+    game.map.rounds.forEach((round) => roundsArr.push(round));
+    console.log(roundsArr);
+
+    for (let i = roundsArr.length + 1; i < 30; i++) {
+      roundsArr.push({
+        round: i,
+      });
+    }
+
     return (
       <div className="layout">
         <div className={`players_alive`}>
@@ -104,13 +137,45 @@ export default class Layout extends React.Component<Props, State> {
         </div>
         <Killfeed />
         {/* <Overview match={match} map={game.map} players={game.players || []} /> */}
-        <RadarMaps match={match} map={game.map} game={game} />
+        <RadarMaps
+          veto={this.getVeto()}
+          match={match}
+          map={game.map}
+          game={game}
+        />
         <MatchBar
+          isFreezeTime={isFreezetime}
           map={game.map}
           phase={game.phase_countdowns}
           bomb={game.bomb}
           match={match}
         />
+        <div className={`rounds-result ${!isFreezetime ? "hide" : ""}`}>
+          {roundsArr.map((round) => (
+            <div key={round.round} className="round">
+              {round.outcome && (
+                <div className="icon">
+                  {round.outcome === "ct_win_elimination" ||
+                  round.outcome === "t_win_elimination" ? (
+                    <DeathIcon />
+                  ) : round.outcome === "ct_win_defuse" ? (
+                    <DefuseIcon />
+                  ) : (
+                    <BombIcon />
+                  )}
+                </div>
+              )}
+              <div
+                className={`block ${
+                  round.side === "CT" ? "CT" : round.side === "T" ? "T" : ""
+                }`}
+              >
+                <div className="block-top" />
+                <span>{getRound(round.round)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
         {/* <Pause phase={game.phase_countdowns} /> */}
         {/* <Timeout map={game.map} phase={game.phase_countdowns} /> */}
         {/* <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} /> */}
