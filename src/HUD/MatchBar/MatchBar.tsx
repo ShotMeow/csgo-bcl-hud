@@ -303,7 +303,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
         </div>
         <div
           className={`winner ${left.side === "CT" ? "CT" : "T"} ${
-            winState.show && winState.side === "left" ? "show" : "show"
+            winState.show && winState.side === "left" ? "show" : "hidden"
           }`}
         >
           {left.logo && left.id ? (
