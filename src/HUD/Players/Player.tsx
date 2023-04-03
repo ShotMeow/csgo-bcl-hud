@@ -2,7 +2,7 @@ import React from "react";
 import * as I from "csgogsi-socket";
 import Weapon from "./../Weapon/Weapon";
 import Avatar from "./Avatar";
-import { ArmorFull } from "../../assets/Icons";
+import { ArmorFull, ArmorHalf, ArmorHelmet } from "../../assets/Icons";
 import { ReactComponent as KillIcon } from "../../assets/bcl/kill_icon.svg";
 import { ReactComponent as DeathIcon } from "../../assets/bcl/death_icon.svg";
 
@@ -113,8 +113,8 @@ const Player = ({ player, isObserved }: IProps) => {
           <div>{player.name}</div>
         </div>
         <div className="armor">
-          <ArmorFull />
-          <span>{player?.state.armor}</span>
+          {player?.state.helmet ? <ArmorHelmet /> : <ArmorHalf />}
+          <span>{player?.state.health}</span>
         </div>
         <div
           className="background-red"

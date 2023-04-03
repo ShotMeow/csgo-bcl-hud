@@ -60,6 +60,7 @@
 
                 .main {
                     svg {
+                        flex-shrink: 0;
                         width: 30px;
                         height: 30px;
                         fill: white;
@@ -71,6 +72,7 @@
                 display: flex;
 
                 > svg {
+                    flex-shrink: 0;
                     width: 30px;
                     height: 30px;
                 }
@@ -99,8 +101,9 @@
                 font-weight: 900;
 
                 svg {
-                    width: 27px;
-                    height: 27px;
+                    flex-shrink: 0;
+                    width: 23px;
+                    height: 23px;
                 }
             }
 
@@ -109,7 +112,7 @@
                 width: 70px;
                 height: 45px;
                 align-items: center;
-                gap: 10px;
+                gap: 2px;
                 font-size: 28px;
                 font-weight: 900;
 
@@ -118,7 +121,8 @@
                 }
 
                 svg {
-                    width: 40px;
+                    flex-shrink: 0;
+                    width: 38px;
                     height: 27px;
                 }
             }

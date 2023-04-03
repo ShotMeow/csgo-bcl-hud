@@ -228,13 +228,13 @@ export default class TeamBox extends React.Component<IProps, IState> {
                 !isPlanted || bomb?.state !== "defusing" ? "hide" : ""
               }`}
             >
+              <Defuse />
               <div className="indicator">
                 <div
                   className="stripe"
                   style={{ width: `${100 - defusing.width}%` }}
                 />
               </div>
-              <Defuse />
             </div>
             <Bomb isPlanted={isPlanted} bomb={bomb} />
           </div>

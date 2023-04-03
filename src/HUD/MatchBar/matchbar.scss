@@ -80,6 +80,10 @@
 	}
 }
 
+.freeze .plant-bar, .freeze .plant-bar {
+	display: none;
+}
+
 #matchbar {
 	display: flex;
 	flex-direction: row;
@@ -158,6 +162,9 @@
 	.left {
 		.defuse-bar, .plant-bar {
 			clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
+			display: flex;
+			flex-direction: row-reverse;
+			left: -350px;
 			.indicator {
 				display: flex;
 				flex-direction: row-reverse;
@@ -391,7 +398,7 @@
 		height: 70px;
 		align-items: center;
 		justify-content: center;
-		font-weight: 600;
+		font-weight: 900;
 		font-size: 28px;
 		background-color: var(--sub-panel-color);
 	}
@@ -417,9 +424,17 @@
 		width: 77px;
 		height: 70px;
 		align-items: center;
-		font-weight: 600;
+		font-weight: 900;
 		font-size: 34px;
 		background-color: var(--sub-panel-color);
+
+		> span {
+			position: relative;
+			margin: 0 1px;
+			top: 2px;
+			width: 32px;
+			text-align: center;
+		}
 
 		> * {
 			z-index: 999999;
@@ -427,21 +442,6 @@
 
 		&.right {
 			flex-direction: row-reverse;
-			gap: 32px;
-		}
-
-		&.left {
-			gap: 30px;
-		}
-
-		&.right > span {
-			position: relative;
-			left: 10px;
-		}
-
-		&.left > span {
-			position: relative;
-			right: 10px;
 		}
 	}
 	.bar {
@@ -613,6 +613,8 @@
 	justify-content: flex-start;
 
 	&.left {
+		position: absolute;
+		left: 20px;
 		> .wins_box:first-child {
 			clip-path: polygon(100% 0, 100% 0, 100% 100%, 0 100%, 0% 20%);
 		}
@@ -645,6 +647,8 @@
 	}
 
 	&.right {
+		position: absolute;
+		right: 20px;
 		> .wins_box:first-child {
 			clip-path: polygon(0 0, 0 0, 100% 20%, 100% 100%, 0 100%);
 		}

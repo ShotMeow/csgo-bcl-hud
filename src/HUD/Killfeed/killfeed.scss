@@ -20,8 +20,9 @@
 .killfeed {
     position: fixed;
     right: 20px;
-    top: 93px;
+    top: 120px;
     display: flex;
+    font-weight: 700;
     flex-direction: column;
     align-items: flex-end;
     .single_kill_container {
@@ -30,17 +31,16 @@
         overflow: hidden;
     }
     .single_kill {
+        clip-path: polygon(3% 0%, 97% 0%, 100% 20%, 100% 80%, 97% 100%, 3% 100%, 0% 80%, 0% 20%);
         display: flex;
         flex-direction: row;
-        background-color: rgba(0,0,0,0.64);
+        background-color: var(--sub-panel-color);
         margin-bottom:5px;
         color:white;
         height: 38px;
         font-size: 14px;
         overflow: hidden;
         align-items: center;
-        font-family: Montserrat;
-        font-weight:500;
         padding-left:15px;
         padding-right:15px;
 

@@ -113,16 +113,16 @@ export default class Layout extends React.Component<Props, State> {
 
     const roundsArr: Partial<RoundInfo>[] = [];
     game.map.rounds.forEach((round) => roundsArr.push(round));
-    console.log(roundsArr);
 
-    for (let i = roundsArr.length + 1; i < 30; i++) {
+    for (let i = roundsArr.length + 1; i < 31; i++) {
       roundsArr.push({
         round: i,
       });
     }
+    console.log(game);
 
     return (
-      <div className="layout">
+      <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
         <div className={`players_alive`}>
           <div className="title_container">Живых игроков</div>
           <div className="counter_container">

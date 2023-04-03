@@ -14,6 +14,7 @@ import {
   ArmorFull,
   HealthFull,
   Bullets,
+  ArmorHalf,
 } from "./../../assets/Icons";
 import { Veto } from "../../api/interfaces";
 import { actions } from "../../App";
@@ -130,7 +131,7 @@ export default class Observed extends React.Component<
                 <span>{player?.state.health}</span>
               </div>
               <div className="armor">
-                <ArmorFull />
+                {player?.state.helmet ? <ArmorHelmet /> : <ArmorHalf />}
                 <span>{player?.state.armor}</span>
               </div>
             </div>

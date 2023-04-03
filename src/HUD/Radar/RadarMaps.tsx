@@ -113,15 +113,11 @@ class MapEntry extends React.PureComponent<{
     const { veto, map, team } = this.props;
     return (
       <div className="veto_entry">
-        {veto && (
-          <div
-            className={`map_name ${
-              map.name.includes(veto.mapName) ? "active" : ""
-            }`}
-          >
-            Playing on {getCurrentMap(veto.mapName)} | Picked by {team?.name}
-          </div>
-        )}
+        <div
+          className={`map_name ${map.name.includes(map.name) ? "active" : ""}`}
+        >
+          Playing on {getCurrentMap(map.name)} | Picked by {team?.name}
+        </div>
       </div>
     );
   }
