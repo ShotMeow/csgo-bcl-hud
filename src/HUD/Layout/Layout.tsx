@@ -38,6 +38,7 @@ interface State {
   forceHide: boolean;
   mvpPlayer: I.Player | null;
   tabActive: boolean;
+  playersListShown: boolean;
 }
 
 const getRound = (round: number | undefined) => {
@@ -67,7 +68,8 @@ export default class Layout extends React.Component<Props, State> {
       showWin: false,
       forceHide: false,
       mvpPlayer: null,
-      tabActive: false
+      tabActive: false,
+      playersListShown: false
     };
   }
 
@@ -75,7 +77,7 @@ export default class Layout extends React.Component<Props, State> {
     GSI.on("roundEnd", (score) => {
       this.setState({ winner: score.winner, showWin: true }, () => {
         setTimeout(() => {
-          this.setState({ showWin: false });
+          this.setState({ showWin: false, mvpPlayer: null });
         }, 4000);
       });
     });
@@ -86,6 +88,9 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({ forceHide: true });
       }
     });
+    actions.on('openPlayersList', () => {
+      this.setState({playersListShown: !this.state.playersListShown});
+    })
   }
 
   getVeto = () => {
@@ -150,6 +155,54 @@ export default class Layout extends React.Component<Props, State> {
             </div>
           </div>
         </div>
+        {this.state.playersListShown && <div className="players-list">
+          <div className={`left ${left.side === "CT" ? 'CT' : 'T'}`}>
+            <div className="header">
+              <div>Nickname</div>
+              <div>K</div>
+              <div>A</div>
+              <div>D</div>
+              <div>HS%</div>
+              <div>ADR</div>
+            </div>
+            <div className="players">
+              {leftPlayers.map((player) => <div className="list-player">
+                <div className="avatar">
+                  <img src={player.avatar ? player.avatar : left.side === "CT" ? CTAvatar : TAvatar} alt="Avatar" />
+                  <div>{player.name}</div>
+                </div>
+                <div>{player.stats.kills}</div>
+                <div>{player.stats.assists}</div>
+                <div>{player.stats.deaths}</div>
+                <div>{player.state.round_killhs}</div>
+                <div>{player.state.adr}</div>
+              </div>)}
+            </div>
+          </div>
+          <div className={`right ${right.side === "CT" ? 'CT' : 'T'}`}>
+            <div className="header">
+              <div>ADR</div>
+              <div>HS%</div>
+              <div>D</div>
+              <div>A</div>
+              <div>K</div>
+              <div>Nickname</div>
+            </div>
+            <div className="players">
+              {rightPlayers.map((player) => <div className="list-player">
+                <div>{player.state.adr}</div>
+                <div>{player.state.round_killhs}</div>
+                <div>{player.stats.deaths}</div>
+                <div>{player.stats.assists}</div>
+                <div>{player.stats.kills}</div>
+                <div className="avatar">
+                  <div>{player.name}</div>
+                  <img src={player.avatar ? player.avatar : right.side === "CT" ? CTAvatar : TAvatar} alt="Avatar" />
+                </div>
+              </div>)}
+            </div>
+          </div>
+        </div>}
           <div className={`mvp-player ${this.state.mvpPlayer?.team.side === "CT" ? "CT" : 'T'} ${isFreezetime && this.state.mvpPlayer ? 'show' : 'hidden'}`}>
             <img className="mvp-team" src={this.state.mvpPlayer?.team.logo || ''} alt="Team Logo" />
             <img className="mvp-avatar" src={this.state.mvpPlayer?.avatar ? this.state.mvpPlayer.avatar : this.state.mvpPlayer?.team.side === "CT" ? CTAvatar : TAvatar} alt="Avatar" />
