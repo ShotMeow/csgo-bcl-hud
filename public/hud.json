@@ -1,7 +1,7 @@
 {
-    "name":"Lexogrine HUD",
+    "name":"ЛЧБ HUD",
     "version":"2.5.0",
-    "author":"Lexogrine",
+    "author":"ShotMeow",
     "legacy": false,
     "radar": true,
     "killfeed": true,
