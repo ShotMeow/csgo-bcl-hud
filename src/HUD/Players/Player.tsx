@@ -77,6 +77,9 @@ const arePlayersEqual = (playerOne: I.Player, playerTwo: I.Player) => {
   return false;
 };
 
+
+
+
 const Player = ({ player, isObserved }: IProps) => {
   const weapons = Object.values(player.weapons).map((weapon) => ({
     ...weapon,
@@ -99,13 +102,13 @@ const Player = ({ player, isObserved }: IProps) => {
       } ${isObserved ? "active" : ""}`}
     >
       <Avatar
-        steamid={player.steamid}
-        player={player}
-        height={80}
-        width={80}
-        showSkull={false}
-        showCam={false}
-        sidePlayer={true}
+          steamid={player.steamid}
+          player={player}
+          height={80}
+          width={80}
+          showSkull={false}
+          showCam={false}
+          sidePlayer={true}
       />
       <div className="top">
         <div className="name">
