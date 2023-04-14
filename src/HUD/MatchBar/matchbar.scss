@@ -858,6 +858,17 @@
 			.header {
 				display: grid;
 				grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+				> div:last-child {
+					padding-right: 30px;
+				}
+
+				> div:nth-child(5) {
+					padding-right: 20px;
+				}
+
+				> div:nth-child(4) {
+					padding-right: 10px;
+				}
 			}
 
 			.players > div {
@@ -866,7 +877,7 @@
 			}
 
 			.players {
-				margin-right: 5px;
+				margin-right: 10px;
 			}
 		}
 
@@ -930,6 +941,18 @@
 			.header {
 				display: grid;
 				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 3fr;
+
+				> div:first-child {
+					padding-left: 30px;
+				}
+
+				> div:nth-child(2) {
+					padding-left: 20px;
+				}
+
+				> div:nth-child(3) {
+					padding-left: 10px;
+				}
 			}
 			.players > div {
 				display: grid;
@@ -937,7 +960,7 @@
 			}
 
 			.players {
-				margin-left: 5px;
+				margin-left: 10px;
 			}
 
 			.avatar {
@@ -980,6 +1003,12 @@
 				display: flex;
 				align-items: center;
 				gap: 10px;
+
+				> div {
+					overflow: hidden;
+					width: 100px;
+					text-overflow: ellipsis;
+				}
 			}
 		}
 	}
