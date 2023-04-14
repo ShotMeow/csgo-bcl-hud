@@ -86,17 +86,6 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({ forceHide: true });
       }
     });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === "Tab") {
-        this.setState({tabActive: true})
-      }
-    })
-
-    document.addEventListener('keyup', (event) => {
-      if (this.state.tabActive) {
-        this.setState({tabActive: false})
-      }
-    })
   }
 
   getVeto = () => {
@@ -147,7 +136,6 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({mvpPlayer: mvpPlayer});
       }
     }
-
     return (
       <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
         <div className={`players_alive`}>
@@ -162,7 +150,6 @@ export default class Layout extends React.Component<Props, State> {
             </div>
           </div>
         </div>
-        {this.state.tabActive && <div>gsgd</div>}
           <div className={`mvp-player ${this.state.mvpPlayer?.team.side === "CT" ? "CT" : 'T'} ${isFreezetime && this.state.mvpPlayer ? 'show' : 'hidden'}`}>
             <img className="mvp-team" src={this.state.mvpPlayer?.team.logo || ''} alt="Team Logo" />
             <img className="mvp-avatar" src={this.state.mvpPlayer?.avatar ? this.state.mvpPlayer.avatar : this.state.mvpPlayer?.team.side === "CT" ? CTAvatar : TAvatar} alt="Avatar" />

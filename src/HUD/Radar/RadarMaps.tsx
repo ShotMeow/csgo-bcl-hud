@@ -110,7 +110,6 @@ class MapEntry extends React.PureComponent<{
 }> {
   render() {
     const { veto, map, team } = this.props;
-    console.log(map);
     return (
       <div className="veto_entry">
         <div
