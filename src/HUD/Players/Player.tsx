@@ -94,7 +94,7 @@ const Player = ({ player, isObserved }: IProps) => {
 
   return (
     <div
-      className={`player ${player.state.flashed ? "flashed" : "flashed"} ${
+      className={`player ${player.state.flashed ? "flashed" : ""} ${
         player.state.health === 0 ? "dead" : ""
       } ${isObserved ? "active" : ""}`}
     >

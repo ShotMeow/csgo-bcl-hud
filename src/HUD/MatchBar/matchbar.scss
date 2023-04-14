@@ -80,7 +80,7 @@
 	}
 }
 
-.freeze .plant-bar, .freeze .plant-bar {
+.freeze .plant-bar, .freeze .players_alive {
 	display: none;
 }
 
@@ -703,4 +703,138 @@
 }
 .wins_box.T.win {
 	background-color: var(--color-new-t);
+}
+
+.mvp-player {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	clip-path: polygon(19% 4.5%, 29% 4.5%, 34% 8.5%, 66% 8.5%, 71% 4.5%, 80% 4.5%, 88% 0%, 100% 0%, 100% 97%, 97% 100%, 3% 100%, 0% 97%, 0% 0%, 12% 0%);
+	position: fixed;
+	top: 110px;
+	left: 50%;
+	width: 320px;
+	height: 460px;
+	transform: translateX(-50%);
+	background-color: var(--sub-panel-color);
+	transition: opacity 1s ease;
+
+	&.hidden {
+		opacity: 0;
+	}
+
+	&.show {
+		opacity: 1;
+	}
+
+	> .mvp-team {
+		position: absolute;
+		top: 10%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-10%);
+		width: 400px;
+		object-fit: contain;
+		height: 240px;
+		opacity: .05;
+	}
+
+	> .mvp-avatar {
+		position: absolute;
+		top: 40px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 20;
+		width: 220px;
+		height: 320px;
+		object-fit: contain;
+	}
+
+	&.CT {
+		.mvp-name {
+			background-color: var(--color-new-ct);
+		}
+
+		.mvp-stats {
+			> div > span {
+				color: var(--color-new-ct);
+			}
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			z-index: 100;
+			bottom: 160px;
+			width: 100%;
+			height: 30%;
+			opacity: 0.8;
+			background: linear-gradient(0deg, var(--color-new-ct) 0%, rgba(0, 0, 0, 0) 100%);
+		}
+	}
+
+	&.T {
+		.mvp-name {
+			background-color: var(--color-new-t);
+		}
+
+		.mvp-stats {
+			> div > span {
+				color: var(--color-new-t);
+			}
+		}
+
+		&::after {
+			content: "";
+			bottom: 160px;
+			z-index: 100;
+			position: absolute;
+			width: 100%;
+			height: 30%;
+			opacity: 0.8;
+			background: linear-gradient(0deg, var(--color-new-t) 0%, rgba(0, 0, 0, 0) 100%);
+		}
+	}
+
+	.mvp-name {
+		position: relative;
+		z-index: 60;
+		color: white;
+		font-size: 22px;
+		font-weight: 900;
+		text-align: center;
+		padding: 5px 0;
+	}
+
+	.mvp-info {
+		color: white;
+		text-align: center;
+
+		> .mvp-stats-title {
+			font-weight: 700;
+			padding-top: 10px;
+		}
+
+		.mvp-stats {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				margin: 20px 0 30px 0;
+				height: 35px;
+				border-right: 2px solid #252423;
+				> div {
+					opacity: 0.6;
+					font-size: 14px;
+				}
+				> span {
+					font-weight: 900;
+					font-size: 24px;
+				}
+			}
+		}
+	}
 }

@@ -32,6 +32,7 @@ interface IProps {
   phase: I.PhaseRaw;
   bomb: I.Bomb | null;
   isFreezeTime: boolean;
+  isMvpPlayer: boolean;
 }
 
 export interface Timer {
@@ -182,7 +183,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
   };
   render() {
     const { defusing, planting, winState } = this.state;
-    const { bomb, match, map, phase, isFreezeTime } = this.props;
+    const { bomb, match, map, phase, isFreezeTime, isMvpPlayer } = this.props;
     const time = stringToClock(phase.phase_ends_in);
     const left = map.team_ct.orientation === "left" ? map.team_ct : map.team_t;
     const right = map.team_ct.orientation === "left" ? map.team_t : map.team_ct;
@@ -250,7 +251,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
                 time
               )}
             </div>
-            <div id="round_now" className={`${isFreezeTime ? "hide" : ""}`}>
+            <div id="round_now" className={`${isFreezeTime && !isMvpPlayer ? "hide" : ""}`}>
               {this.getRoundLabel()}
             </div>
           </div>

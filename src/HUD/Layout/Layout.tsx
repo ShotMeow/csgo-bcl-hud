@@ -4,7 +4,7 @@ import MatchBar from "../MatchBar/MatchBar";
 import SeriesBox from "../MatchBar/SeriesBox";
 import Observed from "./../Players/Observed";
 import { CSGO, Round, RoundInfo, Team } from "csgogsi-socket";
-import { Match } from "../../api/interfaces";
+import {Match, Player} from "../../api/interfaces";
 import RadarMaps from "./../Radar/RadarMaps";
 import Trivia from "../Trivia/Trivia";
 import SideBox from "../SideBoxes/SideBox";
@@ -17,10 +17,15 @@ import Overview from "../Overview/Overview";
 import Tournament from "../Tournament/Tournament";
 import Pause from "../PauseTimeout/Pause";
 import Timeout from "../PauseTimeout/Timeout";
+import TAvatar from "../../assets/bcl/t.png";
+import CTAvatar from "../../assets/bcl/ct.png";
 
 import { ReactComponent as DeathIcon } from "../../assets/bcl/death_icon.svg";
 import { ReactComponent as DefuseIcon } from "../../assets/images/icon_defuse_default.svg";
 import { ReactComponent as BombIcon } from "../../assets/weapons/c4.svg";
+import player from "../Players/Player";
+import * as I from 'csgogsi-socket';
+import {LogoCT, LogoT} from "../../assets/Icons";
 
 interface Props {
   game: CSGO;
@@ -31,6 +36,8 @@ interface State {
   winner: Team | null;
   showWin: boolean;
   forceHide: boolean;
+  mvpPlayer: I.Player | null;
+  tabActive: boolean;
 }
 
 const getRound = (round: number | undefined) => {
@@ -59,6 +66,8 @@ export default class Layout extends React.Component<Props, State> {
       winner: null,
       showWin: false,
       forceHide: false,
+      mvpPlayer: null,
+      tabActive: false
     };
   }
 
@@ -77,6 +86,17 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({ forceHide: true });
       }
     });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === "Tab") {
+        this.setState({tabActive: true})
+      }
+    })
+
+    document.addEventListener('keyup', (event) => {
+      if (this.state.tabActive) {
+        this.setState({tabActive: false})
+      }
+    })
   }
 
   getVeto = () => {
@@ -119,7 +139,14 @@ export default class Layout extends React.Component<Props, State> {
         round: i,
       });
     }
-    console.log(game);
+
+    if (!this.state.mvpPlayer) {
+      const mvpPlayer = game.players.find((player) => player.state.round_kills >= 3);
+
+      if (mvpPlayer) {
+        this.setState({mvpPlayer: mvpPlayer});
+      }
+    }
 
     return (
       <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
@@ -135,6 +162,33 @@ export default class Layout extends React.Component<Props, State> {
             </div>
           </div>
         </div>
+        {this.state.tabActive && <div>gsgd</div>}
+          <div className={`mvp-player ${this.state.mvpPlayer?.team.side === "CT" ? "CT" : 'T'} ${isFreezetime && this.state.mvpPlayer ? 'show' : 'hidden'}`}>
+            <img className="mvp-team" src={this.state.mvpPlayer?.team.logo || ''} alt="Team Logo" />
+            <img className="mvp-avatar" src={this.state.mvpPlayer?.avatar ? this.state.mvpPlayer.avatar : this.state.mvpPlayer?.team.side === "CT" ? CTAvatar : TAvatar} alt="Avatar" />
+            <div className="mvp-name">{this.state.mvpPlayer?.name}</div>
+            <div className="mvp-info">
+              <div className="mvp-stats-title">Статистика в {game.map.round} раунде</div>
+              <div className="mvp-stats">
+                <div>
+                  <div>Damage</div>
+                  <span>{this.state.mvpPlayer?.state.round_totaldmg}</span>
+                </div>
+                <div>
+                  <div>Kills</div>
+                  <span>{this.state.mvpPlayer?.state.round_kills}</span>
+                </div>
+                <div>
+                  <div>ADR</div>
+                  <span>{this.state.mvpPlayer?.state.adr}</span>
+                </div>
+                <div>
+                  <div>%HS</div>
+                  <span>{this.state.mvpPlayer?.state.round_killhs}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         <Killfeed />
         {/* <Overview match={match} map={game.map} players={game.players || []} /> */}
         <RadarMaps
@@ -144,13 +198,14 @@ export default class Layout extends React.Component<Props, State> {
           game={game}
         />
         <MatchBar
+            isMvpPlayer={Boolean(this.state.mvpPlayer)}
           isFreezeTime={isFreezetime}
           map={game.map}
           phase={game.phase_countdowns}
           bomb={game.bomb}
           match={match}
         />
-        <div className={`rounds-result ${!isFreezetime ? "hide" : ""}`}>
+        <div className={`rounds-result ${!isFreezetime || this.state.mvpPlayer ? "hide" : ""}`}>
           {roundsArr.map((round) => (
             <div key={round.round} className="round">
               {round.outcome && (
@@ -203,12 +258,12 @@ export default class Layout extends React.Component<Props, State> {
 
         <Trivia />
 
-        {/* <MapSeries
+        <MapSeries
           teams={[left, right]}
           match={match}
           isFreezetime={isFreezetime}
           map={game.map}
-        /> */}
+        />
         <div className={"boxes left"}>
           <UtilityLevel
             side={left.side}

@@ -84,23 +84,22 @@ class MapsBar extends React.PureComponent<Props> {
 }
 
 const getCurrentMap = (map: string) => {
-  switch (map) {
-    case "de_train":
-      return "Train";
-    case "de_mirage":
-      return "Mirage";
-    case "de_vertigo":
-      return "Vertigo";
-    case "de_cache":
-      return "Cache";
-    case "de_nuke":
-      return "Nuke";
-    case "de_inferno":
-      return "Inferno";
-    case "de_overpass":
-      return "Overpass";
-    case "de_dust2":
-      return "Dust 2";
+  if (map.includes("de_train")) {
+    return "Train";
+  } else if (map.includes("de_mirage")) {
+    return "Mirage";
+  } else if (map.includes("de_vertigo")) {
+    return "Vertigo";
+  } else if (map.includes("de_cache")) {
+    return "Cache";
+  } else if (map.includes("de_nuke")) {
+    return "Nuke";
+  } else if (map.includes("de_inferno")) {
+    return "Inferno";
+  } else if (map.includes("de_overpass")) {
+    return "Overpass";
+  } else if (map.includes("de_dust2")) {
+    return "Dust 2";
   }
 };
 
@@ -111,6 +110,7 @@ class MapEntry extends React.PureComponent<{
 }> {
   render() {
     const { veto, map, team } = this.props;
+    console.log(map);
     return (
       <div className="veto_entry">
         <div

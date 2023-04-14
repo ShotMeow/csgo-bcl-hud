@@ -1,153 +1,102 @@
 .map_series_container {
 	position: fixed;
-	top: 100px;
 	right: 20px;
-	width: 347px;
-	display: flex;
-	opacity: 0;
-	transition: opacity 0.5s;
-	flex-direction: column;
-	font-size: 13px;
-	.veto_container {
-		display: flex;
-		background-color: rgba(0,0,0,0.8);
+	top: 35px;
+	&.hide {
+		display: none;
+	}
+
+	.title_bar {
+		display: grid;
+		grid-template-columns: 1fr 1fr 2fr;
+		text-align: center;
+		font-weight: 700;
+		text-transform: uppercase;
+		background-color: var(--sub-panel-color);
 		color: white;
-		align-items: center;
-        height: 40px;
-        &.active {
-            .veto_winner {
-                display: none;
-            }
-            .veto_score {
-                display: none;
-            }
-        }
-		.veto_map_name {
-			width: 116px;
-			text-transform: uppercase;
-			background-color: rgba(255,255,255,1);
-			color: black;
-			height: 100%;
-			display: flex;
-			font-family: Montserrat;
-			font-weight: 700;
-			align-items: center;
-			justify-content: center;
+		padding: 5px 0;
+		clip-path: polygon(3% 0%, 97% 0%, 100% 30%, 100% 100%, 0 100%, 0% 30%);
+	}
+
+	.veto_container {
+		display: grid;
+		grid-template-columns: 1fr 1fr 2fr;
+		text-align: center;
+		background-color: black;
+		color: white;
+		height: 70px;
+
+		&:last-child {
+			clip-path: polygon(0 0, 100% 0, 100% 85%, 97% 100%, 3% 100%, 0% 85%);
 		}
-		div {
-			img {
-				max-height: 30px;
-				max-width: 30px;
+
+		.active_container {
+			width: 100%;
+			height: 100%;
+			align-items: center;
+			justify-content: flex-end;
+			text-transform: uppercase;
+			font-weight: 700;
+			padding-right: 15px;
+			display: none;
+
+			.active {
+				position: relative;
+				z-index: 50;
 			}
 		}
-		.veto_picker {
-			width: 77px;
-			text-align: center;
-		}
-		.veto_winner {
-			width: 77px;
-			text-align: center;
-		}
-		.active_container {
-			width: 154px;
-			height: 100%;
+
+		> div {
 			display: flex;
-			align-items: center;
 			justify-content: center;
-			.active {
-				background: white;
-				color: black;
-				width: 117px;
-				height: 25px;
+			align-items: center;
+			border: 2px solid #424242;
+		}
+
+		.veto_score {
+			position: relative;
+
+			.map-image {
+				position: absolute;
+				z-index: 20;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				z-index: 30;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(270deg, rgba(0, 0, 0, 0.5) 0%, #000000 90%);
+			}
+
+			.score {
+				position: relative;
+				z-index: 50;
 				display: flex;
 				align-items: center;
-				justify-content: center;
-				font-size: 9px;
-				font-weight: 700;
-				font-family: Montserrat;
-				text-transform: uppercase;
+				font-weight: 900;
+				font-size: 18px;
+				padding: 10px 15px;
+				gap: 15px;
 			}
 		}
-		&:not(.active) {
-			.active_container {
+
+		img {
+			width: 30px;
+			height: 30px;
+		}
+
+		&.active {
+			.score {
 				display: none;
 			}
-		}
-		.veto_score {
-			width: 77px;
-			text-align: center;
-			font-size: 14px;
-		}
-		.logo {
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			.active_container {
+				display: flex;
+			}
 		}
 	}
-	.title_bar {
-		display: flex;
-		background-color: rgba(0,0,0,0.64);
-		height: 25px;
-		color: white;
-		border-radius: 6px 6px 0 0;
-		font-family: Montserrat;
-		font-size: 13px;
-		font-weight: 600;
-		margin-bottom: 2px;
-		div {
-			width: 77px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		.picked {
-			margin-left: auto;
-		}
-    }
-    &.show {
-        opacity: 1;
-    }
-}
-
-#timeout {
-	text-transform: uppercase;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 150px;
-	background-color: var(--sub-panel-color);
-	width: 600px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100px;
-	font-size: 35px;
-	transition: opacity 1.5s;
-	opacity: 0;
-}
-#pause {
-	text-transform: uppercase;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 150px;
-	background-color: var(--sub-panel-color);
-	width: 600px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100px;
-	font-size: 35px;
-	transition: opacity 1.5s;
-	opacity: 0;
-	color: white;
-}
-#timeout.show, #pause.show {
-	opacity: 1;
-}
-#timeout.t {
-	color: var(--color-new-t);
-}
-#timeout.ct {
-	color: var(--color-new-ct);
 }
