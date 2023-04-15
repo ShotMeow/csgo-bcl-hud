@@ -141,6 +141,8 @@ export default class Layout extends React.Component<Props, State> {
         this.setState({mvpPlayer: mvpPlayer});
       }
     }
+
+    console.log(game.bomb?.state);
     return (
       <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
         <div className={`players_alive`}>
@@ -155,6 +157,16 @@ export default class Layout extends React.Component<Props, State> {
             </div>
           </div>
         </div>
+        {game.bomb?.state === "planting" ?
+            <div className="bomb-state">
+              <video autoPlay muted loop><source src={require('../../assets/bcl/planting.webm')} type="video/webm" /></video>
+              <div>{game.bomb.player?.name} PLANTING THE BOMB</div>
+          </div> : game.bomb?.state === "defusing" &&
+            <div className="bomb-state">
+              <video autoPlay muted loop><source src={require('../../assets/bcl/defusing.webm')} type="video/webm" /></video>
+              <div>{game.bomb.player?.name} DEFUSING THE BOMB</div>
+            </div>
+        }
         {this.state.playersListShown && <div className="players-list">
           <div className={`left ${left.side === "CT" ? 'CT' : 'T'}`}>
             <div className="header">
