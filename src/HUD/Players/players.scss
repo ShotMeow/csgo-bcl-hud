@@ -7,6 +7,36 @@
     opacity: 1;
     transition: opacity 0.75s;
 
+    .defuse_indicator, .armor_indicator {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        bottom: 5px;
+    }
+
+    &.left {
+        .defuse_indicator, .armor_indicator {
+            left: 190px;
+        }
+    }
+
+    &.right {
+        .defuse_indicator, .armor_indicator {
+            right: 190px;
+        }
+    }
+
+    .defuse_indicator > svg, .armor_indicator > svg {
+        width: 18px;
+        height: 18px;
+        color: white;
+        fill: white;
+    }
+
+    .avatar {
+        transition: all 0.5s ease;
+    }
+
     .player.flashed {
         .avatar {
             filter: brightness(0) invert(1);

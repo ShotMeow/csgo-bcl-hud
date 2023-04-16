@@ -2,9 +2,11 @@ import React from "react";
 import * as I from "csgogsi-socket";
 import Weapon from "./../Weapon/Weapon";
 import Avatar from "./Avatar";
-import { ArmorFull, ArmorHalf, ArmorHelmet } from "../../assets/Icons";
+import {ArmorHalf, ArmorHelmet} from "../../assets/Icons";
 import { ReactComponent as KillIcon } from "../../assets/bcl/kill_icon.svg";
 import { ReactComponent as DeathIcon } from "../../assets/bcl/death_icon.svg";
+import Bomb from "../Indicators/Bomb";
+import Defuse from "../Indicators/Defuse";
 
 interface IProps {
   player: I.Player;
@@ -94,7 +96,6 @@ const Player = ({ player, isObserved }: IProps) => {
     weapons.filter((weapon) => weapon.type === "Pistol")[0] || null;
   const grenades = weapons.filter((weapon) => weapon.type === "Grenade");
   const isLeft = player.team.orientation === "left";
-
   return (
     <div
       className={`player ${player.state.flashed ? "flashed" : ""} ${
@@ -163,6 +164,8 @@ const Player = ({ player, isObserved }: IProps) => {
               <span>{player.stats.deaths}</span>
             </div>
           </div>
+          <Bomb player={player} />
+          <Defuse player={player} />
           <div className="grenades">
             {grenades.map((grenade) => (
               <React.Fragment

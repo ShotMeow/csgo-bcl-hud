@@ -68,7 +68,7 @@ class App extends React.Component<IProps> {
       return (
         <div className={`bomb ${bomb.state} visible`}
           style={{
-            transform: `translateX(${position[0].toFixed(2)}px) translateY(${position[1].toFixed(2)}px) translateZ(10px) scale(${reverseZoom})`
+            transform: `translateX(${position[0].toFixed(2)}px) translateY(${position[1].toFixed(2)}px) translateZ(10px) scale(2)`
           }}>
           <div className="explode-point"></div>
           <div className="background"></div>

@@ -142,7 +142,6 @@ export default class Layout extends React.Component<Props, State> {
       }
     }
 
-    console.log(game.bomb?.state);
     return (
       <div className={`layout ${isFreezetime ? "freeze" : ""}`}>
         <div className={`players_alive`}>
